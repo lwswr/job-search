@@ -9,7 +9,7 @@ const List = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  top: 200px;
+  top: 250px;
 `;
 
 export const JobList = ({ jobs }: { jobs: JobResponseItem[] }) => {

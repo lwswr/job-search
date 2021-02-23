@@ -1,7 +1,6 @@
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import { Feature } from "ol";
-
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -24,16 +23,14 @@ const ColumnContainer = styled.div`
   height: 100%;
 `;
 
-const LONDON = fromLonLat([-0.12755, 51.507222]);
-
-const convertLonLat = (item: JobResponseItem) => {
-  return fromLonLat([item.longitude, item.latitude]);
-};
+// const convertLonLat = (item: JobResponseItem) => {
+//   return fromLonLat([item.longitude, item.latitude]);
+// };
 
 const createArrayOfFeatures = (list: JobResponseItem[]) => {
   return list.map((item) => {
     return new Feature({
-      geometry: new Point(convertLonLat(item)),
+      geometry: new Point(fromLonLat([item.longitude, item.latitude])),
       name: item.id,
     });
   });
@@ -53,7 +50,7 @@ function App() {
       }
     }
     getData(state.search);
-  }, [dispatch, state.search, state.search.location]);
+  }, [dispatch, state.search]);
 
   return (
     <MainContainer>

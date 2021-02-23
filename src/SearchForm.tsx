@@ -9,7 +9,7 @@ export type SearchProps = {
 
 const Form = styled.form`
   position: fixed;
-  height: 200px;
+  height: 250px;
   width: 20%;
   background: white;
   display: flex;
@@ -25,9 +25,9 @@ export const SearchForm = ({
 }: {
   submit: (search: SearchProps) => void;
 }) => {
-  const [location, setLocation] = React.useState<string>("");
+  const [location, setLocation] = React.useState<string>("London");
   const [jobTitle, setJobTitle] = React.useState<string>("");
-  const [radius, setRadius] = React.useState<number>(0);
+  const [radius, setRadius] = React.useState<number>(10);
 
   return (
     <Form

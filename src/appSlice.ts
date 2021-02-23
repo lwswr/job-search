@@ -19,7 +19,7 @@ export const initialAppState: AppState = {
   },
   search: {
     location: "London",
-    jobTitle: "Web Developer",
+    jobTitle: "",
     searchRadius: 5,
   },
 };
@@ -38,11 +38,9 @@ export const appSlice = createSlice({
         searchRadius: number;
       }>
     ) => {
-      if (payload) {
-        state.search.location = payload.location;
-        state.search.jobTitle = payload.jobTitle;
-        state.search.searchRadius = payload.searchRadius;
-      }
+      state.search.location = payload.location;
+      state.search.jobTitle = payload.jobTitle;
+      state.search.searchRadius = payload.searchRadius;
     },
     setJobList: (
       state,

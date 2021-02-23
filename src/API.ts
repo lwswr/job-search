@@ -1,13 +1,16 @@
 import axios from "axios";
 import { SearchProps } from "./SearchForm";
 
-const APP_ID = "041d53c8";
-const APP_KEY = "761a9c28c5be9f17aaf5f815044818ad";
+const APP_ID1 = "041d53c8";
+const APP_KEY1 = "6db8813c6cff51c2717428ba63b7feac";
+
+const APP_ID2 = "bbab81cc";
+const APP_KEY2 = "96f0a9e3ac84c638a19b8b78d493ddd9";
 
 export const getJobs = (searchParams: SearchProps) => {
   return axios
     .get<JobResponse>(
-      `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${APP_ID}&app_key=${APP_KEY}&results_per_page=50&what=Web%20Developer&where=${searchParams.location}&distance=${searchParams.searchRadius}`,
+      `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${APP_ID2}&app_key=${APP_KEY2}&results_per_page=50&what=Web%20Developer&where=${searchParams.location}&distance=${searchParams.searchRadius}`,
       {
         headers: {
           "content-type": "application/json",
