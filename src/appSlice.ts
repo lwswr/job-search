@@ -19,9 +19,13 @@ export const initialAppState: AppState = {
   },
   search: {
     location: "London",
-    jobTitle: "",
-    searchRadius: 5,
+    jobTitle: "Junior Frontend Engineer",
+    searchRadius: 10,
   },
+};
+
+export const formatSearchTitle = (str: string) => {
+  return str.split(" ").join("%20");
 };
 
 export const appSlice = createSlice({
@@ -39,7 +43,7 @@ export const appSlice = createSlice({
       }>
     ) => {
       state.search.location = payload.location;
-      state.search.jobTitle = payload.jobTitle;
+      state.search.jobTitle = formatSearchTitle(payload.jobTitle);
       state.search.searchRadius = payload.searchRadius;
     },
     setJobList: (

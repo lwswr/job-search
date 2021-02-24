@@ -10,7 +10,7 @@ const APP_KEY2 = "96f0a9e3ac84c638a19b8b78d493ddd9";
 export const getJobs = (searchParams: SearchProps) => {
   return axios
     .get<JobResponse>(
-      `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${APP_ID2}&app_key=${APP_KEY2}&results_per_page=50&what=Web%20Developer&where=${searchParams.location}&distance=${searchParams.searchRadius}`,
+      `https://api.adzuna.com/v1/api/jobs/gb/search/1?app_id=${APP_ID2}&app_key=${APP_KEY2}&results_per_page=50&what=${searchParams.jobTitle}&where=${searchParams.location}&distance=${searchParams.searchRadius}`,
       {
         headers: {
           "content-type": "application/json",
