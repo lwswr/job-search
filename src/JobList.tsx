@@ -5,11 +5,12 @@ import styled from "styled-components";
 
 const List = styled.div`
   position: relative;
-  display: flex;
+  display: inline-block;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
-  top: 250px;
+  align-items: flex-start;
+  top: 320px;
+  z-index: 5;
 `;
 
 export const JobList = ({

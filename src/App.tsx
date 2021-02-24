@@ -26,6 +26,7 @@ const ColumnContainer = styled.div`
   position: relative;
   width: 25%;
   height: 100%;
+  margin-left: 10px;
 `;
 
 export type CustomMarker = {

@@ -5,20 +5,26 @@ import styled from "styled-components";
 import { roundToNearestHundred } from "./utils";
 
 const Container = styled.div`
-  width: 25%;
+  width: 20%;
   position: fixed;
-  top: 275px;
+  top: 330px;
+  height: 60%;
+  z-index: 10;
+  background: white;
   display: flex;
-  justify-content: center;
-  height: 100%;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 10px;
 `;
 
 const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 92%;
   height: 600px;
   justify-content: space-between;
+  background: white;
   padding: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;

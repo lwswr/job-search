@@ -25,9 +25,9 @@ export const initialAppState: AppState = {
     topClass: "",
   },
   search: {
-    location: "London",
-    jobTitle: "Frontend Engineer",
-    searchRadius: 5,
+    location: "",
+    jobTitle: "",
+    searchRadius: 0,
   },
   selectedJobItem: undefined,
   mapView: {

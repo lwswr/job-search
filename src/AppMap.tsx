@@ -6,8 +6,8 @@ import { CustomMarker } from "./App";
 
 const MapContainer = styled.div`
   position: fixed;
-  left: 25%;
-  width: 75%;
+  /* left: 25%; */
+  width: 120%;
   height: 100%;
 `;
 
