@@ -26,7 +26,7 @@ const JobCard = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 400;
-  padding-bottom: 10px;
+  padding: 10px 0px;
   border-bottom: 1px solid lightgrey;
 `;
 

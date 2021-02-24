@@ -27,7 +27,7 @@ export const initialAppState: AppState = {
   search: {
     location: "London",
     jobTitle: "Frontend Engineer",
-    searchRadius: 10,
+    searchRadius: 5,
   },
   selectedJobItem: undefined,
   mapView: {
@@ -80,7 +80,6 @@ export const appSlice = createSlice({
         ];
       }
       state.jobPopUp = true;
-      console.log(state.jobPopUp);
     },
     updatePopUpState: (
       state,

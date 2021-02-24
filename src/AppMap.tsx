@@ -28,10 +28,12 @@ export const AppMap = ({
   points,
   center,
   zoom,
+  submitID,
 }: {
   points: CustomMarker[];
   center: Point;
   zoom: number;
+  submitID: (id: string) => void;
 }) => {
   return (
     <MapContainer>
@@ -41,8 +43,8 @@ export const AppMap = ({
             <Marker
               key={point.id}
               anchor={point.coords}
-              color="red"
-              onClick={() => {}}
+              color="#3875c9"
+              onClick={() => submitID(point.id)}
             />
           );
         })}

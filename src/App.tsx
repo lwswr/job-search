@@ -87,6 +87,7 @@ function App() {
         points={createArrayOfMarkers(state.jobList.results)}
         center={state.mapView.center}
         zoom={state.mapView.zoom}
+        submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
       />
     </MainContainer>
   );

@@ -27,7 +27,7 @@ export const SearchForm = ({
 }) => {
   const [location, setLocation] = React.useState<string>("London");
   const [jobTitle, setJobTitle] = React.useState<string>("Frontend Engineer");
-  const [radius, setRadius] = React.useState<number>(10);
+  const [radius, setRadius] = React.useState<number>(5);
 
   return (
     <Form
