@@ -4,8 +4,8 @@ import { SearchProps } from "./SearchForm";
 const APP_ID1 = "041d53c8";
 const APP_KEY1 = "6db8813c6cff51c2717428ba63b7feac";
 
-const APP_ID2 = "bbab81cc";
-const APP_KEY2 = "96f0a9e3ac84c638a19b8b78d493ddd9";
+// const APP_ID2 = "bbab81cc";
+// const APP_KEY2 = "96f0a9e3ac84c638a19b8b78d493ddd9";
 
 export const getJobs = (searchParams: SearchProps) => {
   return axios
