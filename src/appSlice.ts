@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { JobResponse } from "./API";
+import { Point } from "pigeon-maps/lib/types";
+import { JobResponse, JobResponseItem } from "./API";
 
 export type AppState = {
   jobList: JobResponse;
@@ -7,6 +8,11 @@ export type AppState = {
     location: string;
     jobTitle: string;
     searchRadius: number;
+  };
+  selectedJobItem?: JobResponseItem;
+  mapView: {
+    center: Point;
+    zoom: number;
   };
 };
 
@@ -21,6 +27,11 @@ export const initialAppState: AppState = {
     location: "London",
     jobTitle: "Frontend Engineer",
     searchRadius: 10,
+  },
+  selectedJobItem: undefined,
+  mapView: {
+    center: [51.507222, -0.12755],
+    zoom: 13,
   },
 };
 
@@ -52,9 +63,19 @@ export const appSlice = createSlice({
     ) => {
       state.jobList = payload.response;
     },
+    setSelectedJobItem: (state, { payload }: PayloadAction<{ id: string }>) => {
+      const index: number = state.jobList.results.findIndex(
+        (item) => item.id === payload.id
+      );
+      state.selectedJobItem = state.jobList.results[index];
+      state.mapView.center = [
+        state.jobList.results[index].latitude,
+        state.jobList.results[index].longitude,
+      ];
+    },
   },
 });
 
-export const { setSearch, setJobList } = appSlice.actions;
+export const { setSearch, setJobList, setSelectedJobItem } = appSlice.actions;
 
 export default appSlice.reducer;

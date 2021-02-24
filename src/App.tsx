@@ -2,7 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getJobs, JobResponse, JobResponseItem } from "./API";
-import { AppState, setJobList, setSearch } from "./appSlice";
+import {
+  AppState,
+  setJobList,
+  setSearch,
+  setSelectedJobItem,
+} from "./appSlice";
 import "./index.css";
 import { JobList } from "./JobList";
 import { AppMap } from "./AppMap";
@@ -20,10 +25,6 @@ const ColumnContainer = styled.div`
   width: 20%;
   height: 100%;
 `;
-
-// const convertLonLat = (item: JobResponseItem) => {
-//   return fromLonLat([item.longitude, item.latitude]);
-// };
 
 const createArrayOfMarkers = (list: JobResponseItem[]): Point[] => {
   return list.map((item) => {
@@ -61,9 +62,16 @@ function App() {
             );
           }}
         />
-        <JobList jobs={state.jobList.results} />
+        <JobList
+          jobs={state.jobList.results}
+          submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
+        />
       </ColumnContainer>
-      <AppMap points={createArrayOfMarkers(state.jobList.results)} />
+      <AppMap
+        points={createArrayOfMarkers(state.jobList.results)}
+        center={state.mapView.center}
+        zoom={state.mapView.zoom}
+      />
     </MainContainer>
   );
 }

@@ -12,11 +12,17 @@ const List = styled.div`
   top: 250px;
 `;
 
-export const JobList = ({ jobs }: { jobs: JobResponseItem[] }) => {
+export const JobList = ({
+  jobs,
+  submitID,
+}: {
+  jobs: JobResponseItem[];
+  submitID: (id: string) => void;
+}) => {
   return (
     <List>
       {jobs.map((item) => {
-        return <JobListItem key={item.id} item={item} />;
+        return <JobListItem key={item.id} item={item} submitID={submitID} />;
       })}
     </List>
   );

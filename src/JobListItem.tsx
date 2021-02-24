@@ -30,9 +30,15 @@ const JobTitle = styled.div`
 //   min === max ?
 // }
 
-export const JobListItem = ({ item }: { item: JobResponseItem }) => {
+export const JobListItem = ({
+  item,
+  submitID,
+}: {
+  item: JobResponseItem;
+  submitID: (id: string) => void;
+}) => {
   return (
-    <Item>
+    <Item onClick={() => submitID(item.id)}>
       <JobTitle>{striptags(item.title)}</JobTitle>
       <div>{striptags(item.company.display_name)}</div>
       <div>

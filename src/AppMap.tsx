@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "./index.css";
-import { Map, Marker, Overlay, Point } from "pigeon-maps";
+import { Map, Marker, Point } from "pigeon-maps";
 
 const MapContainer = styled.div`
   position: fixed;
@@ -10,13 +10,28 @@ const MapContainer = styled.div`
   height: 100%;
 `;
 
-export const AppMap = ({ points }: { points: Point[] }) => {
+const TILE_KEY: string = "tLsFLpESk6ikup9Az8ia";
+
+const mapTilerProvider = (x: number, y: number, z: number, dpr: any) => {
+  return `https://api.maptiler.com/maps/streets/256/${z}/${x}/${y}${
+    dpr >= 2 ? "@2x" : ""
+  }.png?key=${TILE_KEY}`;
+};
+
+export const AppMap = ({
+  points,
+  center,
+  zoom,
+}: {
+  points: Point[];
+  center: Point;
+  zoom: number;
+}) => {
   return (
     <MapContainer>
-      {/* <MapContainer id="map" /> */}
-      <Map defaultCenter={[51.507222, -0.12755]} defaultZoom={12}>
+      <Map center={center} zoom={zoom} provider={mapTilerProvider}>
         {points.map((point) => {
-          return <Marker anchor={point} />;
+          return <Marker anchor={point} color="red" />;
         })}
       </Map>
     </MapContainer>
