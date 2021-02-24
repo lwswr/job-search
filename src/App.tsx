@@ -1,6 +1,3 @@
-import Point from "ol/geom/Point";
-import { fromLonLat } from "ol/proj";
-import { Feature } from "ol";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -8,8 +5,9 @@ import { getJobs, JobResponse, JobResponseItem } from "./API";
 import { AppState, setJobList, setSearch } from "./appSlice";
 import "./index.css";
 import { JobList } from "./JobList";
-import { Map } from "./Map";
+import { AppMap } from "./AppMap";
 import { SearchForm, SearchProps } from "./SearchForm";
+import { Point } from "pigeon-maps/lib/types";
 
 const MainContainer = styled.div`
   display: flex;
@@ -27,12 +25,9 @@ const ColumnContainer = styled.div`
 //   return fromLonLat([item.longitude, item.latitude]);
 // };
 
-const createArrayOfFeatures = (list: JobResponseItem[]) => {
+const createArrayOfMarkers = (list: JobResponseItem[]): Point[] => {
   return list.map((item) => {
-    return new Feature({
-      geometry: new Point(fromLonLat([item.longitude, item.latitude])),
-      name: item.id,
-    });
+    return [item.latitude, item.longitude];
   });
 };
 
@@ -68,7 +63,7 @@ function App() {
         />
         <JobList jobs={state.jobList.results} />
       </ColumnContainer>
-      <Map points={createArrayOfFeatures(state.jobList.results)} />
+      <AppMap points={createArrayOfMarkers(state.jobList.results)} />
     </MainContainer>
   );
 }

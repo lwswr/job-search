@@ -19,7 +19,7 @@ export const initialAppState: AppState = {
   },
   search: {
     location: "London",
-    jobTitle: "Junior Frontend Engineer",
+    jobTitle: "Frontend Engineer",
     searchRadius: 10,
   },
 };

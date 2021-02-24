@@ -26,9 +26,7 @@ export const SearchForm = ({
   submit: (search: SearchProps) => void;
 }) => {
   const [location, setLocation] = React.useState<string>("London");
-  const [jobTitle, setJobTitle] = React.useState<string>(
-    "Junior Frontend Engineer"
-  );
+  const [jobTitle, setJobTitle] = React.useState<string>("Frontend Engineer");
   const [radius, setRadius] = React.useState<number>(10);
 
   return (
