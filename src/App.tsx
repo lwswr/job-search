@@ -7,12 +7,14 @@ import {
   setJobList,
   setSearch,
   setSelectedJobItem,
+  updatePopUpState,
 } from "./appSlice";
 import "./index.css";
 import { JobList } from "./JobList";
 import { AppMap } from "./AppMap";
 import { SearchForm, SearchProps } from "./SearchForm";
 import { Point } from "pigeon-maps/lib/types";
+import { DetailedJobItem } from "./DetailedJobItem";
 
 const MainContainer = styled.div`
   display: flex;
@@ -22,13 +24,20 @@ const MainContainer = styled.div`
 
 const ColumnContainer = styled.div`
   position: relative;
-  width: 20%;
+  width: 25%;
   height: 100%;
 `;
 
-const createArrayOfMarkers = (list: JobResponseItem[]): Point[] => {
+export type CustomMarker = {
+  id: string;
+  coords: Point;
+};
+
+export const createArrayOfMarkers = (
+  list: JobResponseItem[]
+): CustomMarker[] => {
   return list.map((item) => {
-    return [item.latitude, item.longitude];
+    return { id: item.id, coords: [item.latitude, item.longitude] };
   });
 };
 
@@ -62,10 +71,17 @@ function App() {
             );
           }}
         />
-        <JobList
-          jobs={state.jobList.results}
-          submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
-        />
+        {state.jobPopUp ? (
+          <DetailedJobItem
+            job={state.selectedJobItem}
+            onClick={(_click) => dispatch(updatePopUpState({ click: _click }))}
+          />
+        ) : (
+          <JobList
+            jobs={state.jobList.results}
+            submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
+          />
+        )}
       </ColumnContainer>
       <AppMap
         points={createArrayOfMarkers(state.jobList.results)}

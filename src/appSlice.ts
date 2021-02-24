@@ -14,6 +14,7 @@ export type AppState = {
     center: Point;
     zoom: number;
   };
+  jobPopUp: boolean;
 };
 
 export const initialAppState: AppState = {
@@ -31,8 +32,9 @@ export const initialAppState: AppState = {
   selectedJobItem: undefined,
   mapView: {
     center: [51.507222, -0.12755],
-    zoom: 13,
+    zoom: 12,
   },
+  jobPopUp: false,
 };
 
 export const formatSearchTitle = (str: string) => {
@@ -68,14 +70,32 @@ export const appSlice = createSlice({
         (item) => item.id === payload.id
       );
       state.selectedJobItem = state.jobList.results[index];
-      state.mapView.center = [
-        state.jobList.results[index].latitude,
-        state.jobList.results[index].longitude,
-      ];
+      if (state.selectedJobItem.longitude === undefined) {
+        // will create a pop up in the future to replace alert()
+        alert("No coordinates for this job");
+      } else {
+        state.mapView.center = [
+          state.selectedJobItem.latitude,
+          state.selectedJobItem.longitude,
+        ];
+      }
+      state.jobPopUp = true;
+      console.log(state.jobPopUp);
+    },
+    updatePopUpState: (
+      state,
+      { payload }: PayloadAction<{ click: boolean }>
+    ) => {
+      state.jobPopUp = payload.click;
     },
   },
 });
 
-export const { setSearch, setJobList, setSelectedJobItem } = appSlice.actions;
+export const {
+  setSearch,
+  setJobList,
+  setSelectedJobItem,
+  updatePopUpState,
+} = appSlice.actions;
 
 export default appSlice.reducer;

@@ -10,7 +10,7 @@ export type SearchProps = {
 const Form = styled.form`
   position: fixed;
   height: 250px;
-  width: 20%;
+  width: 25%;
   background: white;
   display: flex;
   flex-direction: column;
