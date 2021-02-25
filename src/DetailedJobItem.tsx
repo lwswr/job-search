@@ -20,9 +20,10 @@ const Container = styled.div`
 `;
 
 const JobCard = styled.div`
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 380px;
   height: 600px;
   justify-content: space-between;
   background: white;
@@ -54,12 +55,12 @@ export const DetailedJobItem = ({
       {job ? (
         <JobCard>
           <Title>{striptags(job.title)}</Title>
-          <div>{striptags(job.company.display_name)}</div>
-          <div>{striptags(job.location.display_name)}</div>
-          <div>{striptags(job.description)}</div>
-          <div>{striptags(job.contract_type)}</div>
+          <div>{job.company.display_name}</div>
+          <div>{job.location.display_name}</div>
+          <div>{job.description}</div>
+          <div>{job.contract_type}</div>
           <div>
-            {roundToNearestHundred(job.salary_min)} -{" "}
+            £{roundToNearestHundred(job.salary_min)} - £
             {roundToNearestHundred(job.salary_max)}
           </div>
           <Button onClick={() => onClick(false)}>Back</Button>
