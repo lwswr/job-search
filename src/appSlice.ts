@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Point } from "pigeon-maps/lib/types";
 import striptags from "striptags";
 import { JobResponse, JobResponseItem } from "./API";
+import { formatSearchTitle, getIndex } from "./utils";
 
 export type HoverPopUp = {
   isDisplayed: boolean;
@@ -17,11 +18,11 @@ export type AppState = {
     jobTitle: string;
     searchRadius: number;
   };
-  selectedJobItem?: JobResponseItem;
   mapView: {
     center: Point;
     zoom: number;
   };
+  selectedJobItem?: JobResponseItem;
   jobPopUp: boolean;
   hoverPopUp: HoverPopUp;
 };
@@ -38,11 +39,11 @@ export const initialAppState: AppState = {
     jobTitle: "",
     searchRadius: 0,
   },
-  selectedJobItem: undefined,
   mapView: {
     center: [51.507222, -0.12755],
     zoom: 12,
   },
+  selectedJobItem: undefined,
   jobPopUp: false,
   hoverPopUp: {
     isDisplayed: false,
@@ -50,10 +51,6 @@ export const initialAppState: AppState = {
     company: "",
     coords: [0, 0],
   },
-};
-
-export const formatSearchTitle = (str: string) => {
-  return str.split(" ").join("%20");
 };
 
 export const appSlice = createSlice({
@@ -81,9 +78,7 @@ export const appSlice = createSlice({
       state.jobList = payload.response;
     },
     setSelectedJobItem: (state, { payload }: PayloadAction<{ id: string }>) => {
-      const index: number = state.jobList.results.findIndex(
-        (item) => item.id === payload.id
-      );
+      const index = getIndex(state.jobList.results, payload.id);
       state.selectedJobItem = state.jobList.results[index];
       if (state.selectedJobItem.longitude === undefined) {
         // will create a pop up in the future to replace alert()
@@ -106,9 +101,7 @@ export const appSlice = createSlice({
       state,
       { payload }: PayloadAction<{ event: boolean; id: string }>
     ) => {
-      const index: number = state.jobList.results.findIndex(
-        (item) => item.id === payload.id
-      );
+      const index = getIndex(state.jobList.results, payload.id);
       state.hoverPopUp.isDisplayed = payload.event;
       state.hoverPopUp.title = striptags(state.jobList.results[index].title);
       state.hoverPopUp.company =
@@ -117,7 +110,6 @@ export const appSlice = createSlice({
         state.jobList.results[index].latitude,
         state.jobList.results[index].longitude,
       ];
-      console.log(state.jobPopUp);
     },
   },
 });
