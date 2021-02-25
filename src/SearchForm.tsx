@@ -40,6 +40,7 @@ const TextInput = styled.input`
 `;
 
 const Title = styled.div`
+  font-family: "Cabin", sans-serif;
   text-align: center;
   font-size: 30px;
   font-weight: 400;

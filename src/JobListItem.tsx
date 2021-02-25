@@ -13,7 +13,8 @@ const Item = styled.div`
   padding: 10px;
   background: white;
   border-radius: 10px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   justify-content: space-around;
   transition: 0.3s;
   :hover {
@@ -25,11 +26,6 @@ const JobTitle = styled.div`
   font-weight: 400;
   font-size: 20px;
 `;
-
-// export const checkSalary = (min: number, max: number) => {
-//   let average = 0;
-//   min === max ?
-// }
 
 export const JobListItem = ({
   item,
