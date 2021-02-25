@@ -7,7 +7,7 @@ import styled from "styled-components";
 const Item = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 400px;
   height: 100px;
   margin-top: 10px;
   padding: 10px;
@@ -34,12 +34,19 @@ const JobTitle = styled.div`
 export const JobListItem = ({
   item,
   submitID,
+  submitEvent,
 }: {
   item: JobResponseItem;
   submitID: (id: string) => void;
+  submitEvent: (event: boolean, id: string) => void;
 }) => {
   return (
-    <Item onClick={() => submitID(item.id)}>
+    <Item
+      onClick={() => {
+        submitID(item.id);
+        submitEvent(true, item.id);
+      }}
+    >
       <JobTitle>{striptags(item.title)}</JobTitle>
       <div>{striptags(item.company.display_name)}</div>
       <div>

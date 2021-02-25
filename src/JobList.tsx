@@ -16,14 +16,23 @@ const List = styled.div`
 export const JobList = ({
   jobs,
   submitID,
+  submitEvent,
 }: {
   jobs: JobResponseItem[];
   submitID: (id: string) => void;
+  submitEvent: (event: boolean, id: string) => void;
 }) => {
   return (
     <List>
       {jobs.map((item) => {
-        return <JobListItem key={item.id} item={item} submitID={submitID} />;
+        return (
+          <JobListItem
+            key={item.id}
+            item={item}
+            submitID={submitID}
+            submitEvent={submitEvent}
+          />
+        );
       })}
     </List>
   );

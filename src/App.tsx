@@ -7,6 +7,7 @@ import {
   setJobList,
   setSearch,
   setSelectedJobItem,
+  updateHoverPopUpState,
   updatePopUpState,
 } from "./appSlice";
 import "./index.css";
@@ -75,12 +76,17 @@ function App() {
         {state.jobPopUp ? (
           <DetailedJobItem
             job={state.selectedJobItem}
-            onClick={(_click) => dispatch(updatePopUpState({ click: _click }))}
+            onClick={(_click) => {
+              dispatch(updatePopUpState({ click: _click }));
+            }}
           />
         ) : (
           <JobList
             jobs={state.jobList.results}
             submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
+            submitEvent={(_event, _id) =>
+              dispatch(updateHoverPopUpState({ event: _event, id: _id }))
+            }
           />
         )}
       </ColumnContainer>
@@ -88,7 +94,12 @@ function App() {
         points={createArrayOfMarkers(state.jobList.results)}
         center={state.mapView.center}
         zoom={state.mapView.zoom}
-        submitID={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
+        submitIDClick={(_id) => dispatch(setSelectedJobItem({ id: _id }))}
+        submitIDHover={(_event, _id) =>
+          dispatch(updateHoverPopUpState({ event: _event, id: _id }))
+        }
+        hoverPopUp={state.hoverPopUp}
+        popUp={state.jobPopUp}
       />
     </MainContainer>
   );

@@ -1,6 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Point } from "pigeon-maps/lib/types";
+import striptags from "striptags";
 import { JobResponse, JobResponseItem } from "./API";
+
+export type HoverPopUp = {
+  isDisplayed: boolean;
+  title: string;
+  company: string;
+  coords: Point;
+};
 
 export type AppState = {
   jobList: JobResponse;
@@ -15,6 +23,7 @@ export type AppState = {
     zoom: number;
   };
   jobPopUp: boolean;
+  hoverPopUp: HoverPopUp;
 };
 
 export const initialAppState: AppState = {
@@ -35,6 +44,12 @@ export const initialAppState: AppState = {
     zoom: 12,
   },
   jobPopUp: false,
+  hoverPopUp: {
+    isDisplayed: false,
+    title: "",
+    company: "",
+    coords: [0, 0],
+  },
 };
 
 export const formatSearchTitle = (str: string) => {
@@ -87,6 +102,23 @@ export const appSlice = createSlice({
     ) => {
       state.jobPopUp = payload.click;
     },
+    updateHoverPopUpState: (
+      state,
+      { payload }: PayloadAction<{ event: boolean; id: string }>
+    ) => {
+      const index: number = state.jobList.results.findIndex(
+        (item) => item.id === payload.id
+      );
+      state.hoverPopUp.isDisplayed = payload.event;
+      state.hoverPopUp.title = striptags(state.jobList.results[index].title);
+      state.hoverPopUp.company =
+        state.jobList.results[index].company.display_name;
+      state.hoverPopUp.coords = [
+        state.jobList.results[index].latitude,
+        state.jobList.results[index].longitude,
+      ];
+      console.log(state.jobPopUp);
+    },
   },
 });
 
@@ -95,6 +127,7 @@ export const {
   setJobList,
   setSelectedJobItem,
   updatePopUpState,
+  updateHoverPopUpState,
 } = appSlice.actions;
 
 export default appSlice.reducer;

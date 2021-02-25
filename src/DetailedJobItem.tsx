@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { roundToNearestHundred } from "./utils";
 
 const Container = styled.div`
-  width: 20%;
+  width: 400px;
   position: fixed;
   top: 330px;
   height: 60%;
@@ -13,6 +13,7 @@ const Container = styled.div`
   background: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 10px;
@@ -21,7 +22,7 @@ const Container = styled.div`
 const JobCard = styled.div`
   display: flex;
   flex-direction: column;
-  width: 92%;
+  width: 90%;
   height: 600px;
   justify-content: space-between;
   background: white;

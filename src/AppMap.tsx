@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import "./index.css";
-import { Map, Marker, Point } from "pigeon-maps";
+import { Map, Marker, Point, Overlay } from "pigeon-maps";
 import { CustomMarker } from "./App";
+import { HoverPopUpComp } from "./HoverPopUpComp";
+import { HoverPopUp } from "./appSlice";
 
 const MapContainer = styled.div`
   position: fixed;
@@ -28,12 +30,18 @@ export const AppMap = ({
   points,
   center,
   zoom,
-  submitID,
+  submitIDClick,
+  submitIDHover,
+  hoverPopUp,
+  popUp,
 }: {
   points: CustomMarker[];
   center: Point;
   zoom: number;
-  submitID: (id: string) => void;
+  submitIDClick: (id: string) => void;
+  submitIDHover: (event: boolean, id: string) => void;
+  hoverPopUp: HoverPopUp;
+  popUp: boolean;
 }) => {
   return (
     <MapContainer>
@@ -44,10 +52,20 @@ export const AppMap = ({
               key={point.id}
               anchor={point.coords}
               color="#3875c9"
-              onClick={() => submitID(point.id)}
+              onClick={() => submitIDClick(point.id)}
+              onMouseOver={() => submitIDHover(true, point.id)}
+              onMouseOut={() => submitIDHover(false, point.id)}
             />
           );
         })}
+        {hoverPopUp.isDisplayed || popUp ? (
+          <Overlay anchor={hoverPopUp.coords} offset={[120, 100]}>
+            <HoverPopUpComp
+              title={hoverPopUp.title}
+              company={hoverPopUp.company}
+            />
+          </Overlay>
+        ) : null}
       </Map>
     </MapContainer>
   );
