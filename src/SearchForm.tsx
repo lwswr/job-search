@@ -34,16 +34,17 @@ const TextInput = styled.input`
   height: 30px;
   font-size: 20px;
   border: none;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(0, 137, 216);
   outline: none;
   padding-top: 5px;
 `;
 
 const Title = styled.div`
+  text-align: center;
   font-size: 30px;
   font-weight: 400;
   padding: 10px 0px;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid rgb(0, 137, 216);
   letter-spacing: 9.5px;
 `;
 

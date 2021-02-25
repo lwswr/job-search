@@ -40,7 +40,18 @@ const Title = styled.div`
 
 const Button = styled.button`
   align-self: flex-end;
-  width: 50px;
+  color: white;
+  width: 60px;
+  background: rgb(0, 137, 216);
+  border: none;
+  height: 35px;
+  padding: 10px 5px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-family: "Montserrat", sans-serif;
+  :hover {
+    background: #3279a8;
+  }
 `;
 
 export const DetailedJobItem = ({
