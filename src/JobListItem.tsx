@@ -13,12 +13,12 @@ const Item = styled.div`
   padding: 10px;
   background: white;
   border-radius: 10px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   justify-content: space-around;
   transition: 0.3s;
   :hover {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
 `;
 
